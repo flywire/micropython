@@ -78,20 +78,18 @@ Versions starting with 1.3 support both Python 2.7 and Python 3.4 (or newer).
 An older version (at least 1.2.1 is needed) works fine but will require Python
 2.7.
 
-Using esptool.py you can erase the flash with the command::
-
-    esptool.py --port /dev/ttyUSB0 erase_flash
-
-And then deploy the new firmware using::
+Using esptool.py you can deploy the new firmware using::
 
     esptool.py --chip esp32 --port /dev/ttyUSB0 write_flash -z 0x1000 esp32-20180511-v1.9.4.bin
 
 Notes:
 
-* You might need to change the "port" setting to something else relevant for your
-  PC
+* You must use the `port <https://github.com/espressif/esptool#serial-port>`_
+  setting for your operating system (eg COM1)
 * You may need to reduce the baudrate if you get errors when flashing
   (eg down to 115200 by adding ``--baud 115200`` into the command)
+* The `write_flash` optional argument `-e` can be added to
+  erase all regions of flash (not just write areas) before programming
 * For some boards with a particular FlashROM configuration you may need to
   change the flash mode (eg by adding ``-fm dio`` into the command)
 * The filename of the firmware should match the file that you have
